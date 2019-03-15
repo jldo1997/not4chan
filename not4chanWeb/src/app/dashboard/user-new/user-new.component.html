@@ -1,0 +1,22 @@
+<div fxLayout="column" fxFlexFill>
+  
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Ingrese nombre" [(ngModel)]="name">
+  </mat-form-field><p>
+    
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [(ngModel)]="email">
+    </mat-form-field><p>
+      
+        
+      <mat-form-field>
+        <mat-select placeholder="Role" [(ngModel)]="role" name="role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><b>
+      
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button color="primary" *ngIf="validateEmail()" (click)="createUser()">Crear</button>
+        </div>

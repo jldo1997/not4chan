@@ -1,0 +1,10 @@
+<div fxLayout="column" fxFlexFill>
+  <p>Write DELETE to delete this thread</p>
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="DELETE HERE" [(ngModel)]="delete">
+    </mat-form-field><p>
+
+  <div class="botones" fxLayoutAlign="center end">
+    <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
+  </div>
+</div>

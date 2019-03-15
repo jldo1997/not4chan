@@ -1,0 +1,18 @@
+<ngx-datatable
+class="material"
+[rows]="rows"
+[columnMode]="'force'"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="'auto'"
+[limit]="10"
+[selected]="selected"
+[selectionType]="'single'"
+(select)='onSelect($event)'>
+<ngx-datatable-column name="Id" prop="id"></ngx-datatable-column>
+<ngx-datatable-column name="User" prop="user.name"></ngx-datatable-column>
+<ngx-datatable-column name="Photo" prop="photo.url"></ngx-datatable-column>
+<ngx-datatable-column name="Response to" prop="responseTo.content"></ngx-datatable-column>
+<ngx-datatable-column name="Content" prop="content"></ngx-datatable-column>
+</ngx-datatable>
+

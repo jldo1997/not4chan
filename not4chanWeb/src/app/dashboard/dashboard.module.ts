@@ -14,6 +14,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { UserDeleditComponent } from './user-deledit/user-deledit.component';
+import { UserNewComponent } from './user-new/user-new.component';
+import { ThreadTableComponent } from './thread-table/thread-table.component';
+import { ThreadDeleteComponent } from './thread-delete/thread-delete.component';
+import { CommentTableComponent } from './comment-table/comment-table.component';
+import { CommentDeleditComponent } from './comment-deledit/comment-deledit.component';
 
 @NgModule({
   imports: [
@@ -33,7 +39,8 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     FormsModule
   ],
-  declarations: [ DashboardComponent, UserTableComponent ]
+  entryComponents: [UserDeleditComponent, UserNewComponent, ThreadDeleteComponent, CommentDeleditComponent],
+  declarations: [ DashboardComponent, UserTableComponent, UserDeleditComponent, UserNewComponent, ThreadTableComponent, ThreadDeleteComponent, CommentTableComponent, CommentDeleditComponent ]
 })
 
 export class DashboardModule {}

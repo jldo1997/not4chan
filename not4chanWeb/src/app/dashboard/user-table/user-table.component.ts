@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserResponse } from 'src/app/interfaces/users-response.interface';
 import { UserService } from 'src/app/services/user.service';
 import { user } from 'src/app/model/user';
+import { MatDialog } from '@angular/material';
+import { UserDeleditComponent } from '../user-deledit/user-deledit.component';
+import { UserNewComponent } from '../user-new/user-new.component';
 
 @Component({
   selector: 'app-user-table',
@@ -14,7 +17,7 @@ export class UserTableComponent implements OnInit {
   temp: UserResponse;
   
 
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllUsers();
@@ -30,16 +33,26 @@ export class UserTableComponent implements OnInit {
     });
   }
 
-  openDialogNewProduct() {
+  openDialogNewAdminUser() {
+    const dialogoNewProduct = this.dialog.open(UserNewComponent);
+
+    dialogoNewProduct.afterClosed().subscribe(result => {
+      this.getAllUsers();
+    });
   }
 
-  openDialogEdit(selected: user) {
-    console.log(selected);
+  openDialogDeledit(selected: user) {
+    const dialogEdit = this.dialog.open(UserDeleditComponent, {
+      data :{'recurso': selected }
+    });
     
+    dialogEdit.afterClosed().subscribe(result =>{
+    this.getAllUsers();
+  });
   }
 
   onSelect({ selected }) {
-    this.openDialogEdit(selected[0]);
+    this.openDialogDeledit(selected[0]);
 }
 
 updateFilter(event) {

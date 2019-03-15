@@ -1,0 +1,18 @@
+<div fxLayout="column" fxFlexFill>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Username" [(ngModel)]="name">
+  </mat-form-field><p>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="E-mail" [(ngModel)]="email">
+  </mat-form-field><p>
+
+  <div class="botones" fxLayoutAlign="rigth end">
+    <button mat-raised-button color="primary" (click)="editUser()">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
+  </div>
+  <div class="botones" fxLayoutAlign="left end">
+    <button *ngIf="!banFlag" mat-raised-button color="warn" (click)="banUser()">Ban</button>
+    <button *ngIf="banFlag" mat-raised-button color="warn" (click)="unbanUser()">Unban</button>
+  </div>
+</div>

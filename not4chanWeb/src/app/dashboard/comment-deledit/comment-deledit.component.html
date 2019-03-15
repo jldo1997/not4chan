@@ -1,0 +1,12 @@
+<div fxLayout="column" fxFlexFill>
+  <h3>Edit or delete?</h3>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Content" [(ngModel)]="content">
+  </mat-form-field><p>
+
+  <div class="botones" fxLayoutAlign="center end">
+    <button mat-raised-button color="primary" (click)="editComment()">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteComment()">Delete</button>
+  </div>
+</div>
