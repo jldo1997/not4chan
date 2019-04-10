@@ -26,8 +26,4 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/']);
   }
-
-  gotoprofile() {
-    this.router.navigate(['/dashboard/profile']);
-  }
 }

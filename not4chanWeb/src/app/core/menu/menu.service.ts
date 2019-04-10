@@ -22,12 +22,6 @@ export interface Menu {
 
 const MENUITEMS = [
   {
-    state: '/',
-    name: 'HOME',
-    type: 'link',
-    icon: 'explore'
-  },
-  {
     state: 'dashboard',
     name: 'List',
     type: 'sub',
@@ -36,6 +30,7 @@ const MENUITEMS = [
       {state: 'user-table', name: 'Users list',type: 'link'},
       {state: 'comment-table', name: 'Comments list',type: 'link'},
       {state: 'thread-table', name: 'Threads list',type: 'link'},
+      {state: 'category-table', name: 'Category list',type: 'link'}
     ]
   }
 ];

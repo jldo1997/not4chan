@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { comment } from 'src/app/model/comment.model';
 import { CommentResponse } from 'src/app/interfaces/comments-response.interface';
 import { CommentDeleditComponent } from '../comment-deledit/comment-deledit.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-comment-table',
@@ -15,10 +16,11 @@ export class CommentTableComponent implements OnInit {
   selected = [];
   temp: CommentResponse;
 
-  constructor(private service: CommentService, private dialog: MatDialog) { }
+  constructor(private titleService: Title, private service: CommentService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllComments();
+    this.titleService.setTitle('3chan admin panel - List of comments');
   }
 
   getAllComments() {

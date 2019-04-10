@@ -7,6 +7,7 @@ export class thread {
     comments: comment[];
     headerComment: comment;
     title: string;
+    numberComments: number;
 
     constructor(id: string, c: category, cms: comment[], headerCms: comment, t: string) {
         this.id = id;
@@ -14,5 +15,9 @@ export class thread {
         this.comments = cms;
         this.headerComment = headerCms;
         this.title = t;
+    }
+
+    set NumberComments(number: number) {
+        this.numberComments = number
     }
 }

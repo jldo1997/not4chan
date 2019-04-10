@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { ThreadTableComponent } from './thread-table/thread-table.component';
 import { CommentTableComponent } from './comment-table/comment-table.component';
+import { CategoryTableComponent } from './category-table/category-table.component';
 
 export const DashboardRoutes: Routes = [{
   path: '',
@@ -18,7 +19,10 @@ export const DashboardRoutes: Routes = [{
     component: ThreadTableComponent
   }, {
     path: 'comment-table',
-    component: CommentTableComponent
+    component: CommentTableComponent 
+  }, {
+    path: 'category-table',
+    component: CategoryTableComponent
   }]
   
 }];

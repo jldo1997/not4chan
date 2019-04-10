@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LoginDto } from 'src/app/model/dto/login.dto';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signin',
@@ -16,13 +17,14 @@ export class SigninComponent implements OnInit {
   userInvalidFlag: boolean;
 
   public form: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {}
+  constructor(private titleService: Title, private fb: FormBuilder, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.userInvalidFlag = false;
     this.form = this.fb.group ( {
       uname: [null , Validators.compose ( [ Validators.required ] )] , password: [null , Validators.compose ( [ Validators.required ] )]
     } );
+    this.titleService.setTitle('3chan admin panel - Login');
   }
 
   onSubmit() {
@@ -33,7 +35,7 @@ export class SigninComponent implements OnInit {
       if(loginResp.user.role == "admin"){
         console.log(loginResp);
         this.authService.setLoginData(loginResp);
-        this.router.navigate ( [ '/dashboard' ] );
+        this.router.navigate ( [ '/dashboard/user-table' ] );
       } else {
         this.userInvalidFlag = true;
       }

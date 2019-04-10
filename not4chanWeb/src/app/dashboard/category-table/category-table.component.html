@@ -1,0 +1,22 @@
+<div style="width: 107%;">
+    <mat-form-field style="width: 90%;" class="mb-1">
+    </mat-form-field>
+    
+    <button mat-mini-fab color="primary" (click)="openDialogNewCategory()">
+        <mat-icon>add</mat-icon>
+    </button>
+    </div>
+<ngx-datatable
+class="material"
+[rows]="rows"
+[columnMode]="'force'"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="'auto'"
+[limit]="10"
+[selected]="selected"
+[selectionType]="'single'"
+(select)='onSelect($event)'>
+<ngx-datatable-column name="ID" prop="id"></ngx-datatable-column>
+<ngx-datatable-column name="Title" prop="title"></ngx-datatable-column>
+</ngx-datatable>

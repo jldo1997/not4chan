@@ -20,6 +20,9 @@ import { ThreadTableComponent } from './thread-table/thread-table.component';
 import { ThreadDeleteComponent } from './thread-delete/thread-delete.component';
 import { CommentTableComponent } from './comment-table/comment-table.component';
 import { CommentDeleditComponent } from './comment-deledit/comment-deledit.component';
+import { CategoryTableComponent } from './category-table/category-table.component';
+import { CategoryDeleteComponent } from './category-delete/category-delete.component';
+import { CategoryNewComponent } from './category-new/category-new.component';
 
 @NgModule({
   imports: [
@@ -39,8 +42,8 @@ import { CommentDeleditComponent } from './comment-deledit/comment-deledit.compo
     MatSelectModule,
     FormsModule
   ],
-  entryComponents: [UserDeleditComponent, UserNewComponent, ThreadDeleteComponent, CommentDeleditComponent],
-  declarations: [ DashboardComponent, UserTableComponent, UserDeleditComponent, UserNewComponent, ThreadTableComponent, ThreadDeleteComponent, CommentTableComponent, CommentDeleditComponent ]
+  entryComponents: [UserDeleditComponent, UserNewComponent, ThreadDeleteComponent, CommentDeleditComponent, CategoryDeleteComponent, CategoryNewComponent],
+  declarations: [ DashboardComponent, UserTableComponent, UserDeleditComponent, UserNewComponent, ThreadTableComponent, ThreadDeleteComponent, CommentTableComponent, CommentDeleditComponent, CategoryTableComponent, CategoryDeleteComponent, CategoryNewComponent]
 })
 
 export class DashboardModule {}

@@ -5,6 +5,7 @@ import { user } from 'src/app/model/user';
 import { MatDialog } from '@angular/material';
 import { UserDeleditComponent } from '../user-deledit/user-deledit.component';
 import { UserNewComponent } from '../user-new/user-new.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-table',
@@ -17,10 +18,11 @@ export class UserTableComponent implements OnInit {
   temp: UserResponse;
   
 
-  constructor(private userService:UserService, private dialog: MatDialog) { }
+  constructor(private titleService: Title, private userService:UserService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllUsers();
+    this.titleService.setTitle('3chan admin panel - List of users');
   }
 
   getAllUsers() {
