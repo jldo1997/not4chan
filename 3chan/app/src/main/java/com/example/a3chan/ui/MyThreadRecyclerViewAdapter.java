@@ -2,6 +2,7 @@ package com.example.a3chan.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import com.example.a3chan.common.SharedPreferencesManager;
 import com.example.a3chan.data.ThreadViewModel;
 import com.example.a3chan.retrofit.response.Comment;
 import com.example.a3chan.retrofit.response.Thread;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -46,20 +49,18 @@ public class MyThreadRecyclerViewAdapter extends RecyclerView.Adapter<MyThreadRe
         holder.mItem = mValues.get(position);
         holder.tvTitle.setText(holder.mItem.getTitle());
         holder.tvFirstComment.setText(holder.mItem.getHeaderComment().getContent());
+        holder.tvCat.setText(holder.mItem.getCategory().getTitle());
         int cont = 0;
         for(Comment c : holder.mItem.getComments()){
             cont++;
         }
-        //un pequeño truco en la manga para evitar que salga uno de menos
-        if(cont != 0)
-            cont++;
 
         holder.tvNumberComments.setText(Integer.toString(cont));
         if(holder.mItem.getHeaderComment().getPhoto() != null) {
             Glide
                     .with(ctx)
                     .load(holder.mItem.getHeaderComment().getPhoto().getUrl())
-                    .override(150, 150)
+                    .override(75, 75)
                     .into(holder.ivPict);
         }
 
@@ -67,7 +68,9 @@ public class MyThreadRecyclerViewAdapter extends RecyclerView.Adapter<MyThreadRe
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: MOVE TO DETAILS THREAD ACTIVITY
+                Intent i = new Intent(ctx,ThreadDetailActivity.class);
+                i.putExtra("id", holder.mItem.getId());
+                ctx.startActivity(i);
             }
         });
     }
@@ -90,6 +93,7 @@ public class MyThreadRecyclerViewAdapter extends RecyclerView.Adapter<MyThreadRe
         public TextView tvTitle;
         public TextView tvFirstComment;
         public TextView tvNumberComments;
+        public TextView tvCat;
         public Thread mItem;
 
         public ViewHolder(View view) {
@@ -99,6 +103,7 @@ public class MyThreadRecyclerViewAdapter extends RecyclerView.Adapter<MyThreadRe
             tvTitle = view.findViewById(R.id.tvThreadListTitle);
             tvFirstComment = view.findViewById(R.id.tvThreadListFirstComment);
             tvNumberComments = view.findViewById(R.id.tvThreadListNumberComments);
+            tvCat = view.findViewById(R.id.tvThreadListCat);
 
         }
 

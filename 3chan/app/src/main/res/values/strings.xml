@@ -3,4 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_signup">Sign up to use our awesome forum!</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_forum">3chan forums</string>
+    <string name="title_user">User</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_thread_detail">ThreadDetailActivity</string>
 </resources>

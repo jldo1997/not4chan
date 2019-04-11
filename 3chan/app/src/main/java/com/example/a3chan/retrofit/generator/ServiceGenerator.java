@@ -1,4 +1,6 @@
-package com.example.not4chanapp.retrofit.generator;
+package com.example.a3chan.retrofit.generator;
+
+import com.example.a3chan.common.Constants;
 
 import java.io.IOException;
 
@@ -14,12 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static final String BASE_URL = "https://not4chan.herokuapp.com";
-    public static String MASTER_KEY = "SCjWastW6zYoFjdbcpX3MD5PjD6JX7Mh";
-
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(Constants.API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = null;
@@ -79,7 +78,7 @@ public class ServiceGenerator {
                         HttpUrl originalUrl = original.url();
 
                         HttpUrl url = originalUrl.newBuilder()
-                                .addQueryParameter("access_token", MASTER_KEY)
+                                .addQueryParameter("access_token", Constants.API_MASTER_KEY)
                                 .build();
 
                         Request request = original.newBuilder()

@@ -1,29 +1,40 @@
-package com.example.a3chan;
+package com.example.a3chan.ui;
 
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.a3chan.CommentsFragment.OnListFragmentInteractionListener;
-import com.example.a3chan.dummy.DummyContent.DummyItem;
+import com.bumptech.glide.Glide;
+import com.example.a3chan.R;
+import com.example.a3chan.common.Constants;
+import com.example.a3chan.common.MyApp;
+import com.example.a3chan.common.SharedPreferencesManager;
+import com.example.a3chan.data.ThreadViewModel;
+import com.example.a3chan.retrofit.response.Comment;
+import com.example.a3chan.retrofit.response.Thread;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyCommentsRecyclerViewAdapter extends RecyclerView.Adapter<MyCommentsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private List<Comment> mValues;
+    private Context ctx;
+    private ThreadViewModel viewModel;
 
-    public MyCommentsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyCommentsRecyclerViewAdapter(List<Comment> items, Context ctx) {
         mValues = items;
-        mListener = listener;
+        this.ctx = ctx;
+        viewModel = ViewModelProviders.of((FragmentActivity) ctx).get(ThreadViewModel.class);
     }
 
     @Override
@@ -36,19 +47,44 @@ public class MyCommentsRecyclerViewAdapter extends RecyclerView.Adapter<MyCommen
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.tvId.setText(holder.mItem.getId().substring(holder.mItem.getId().length() - 5));
+        holder.tvContent.setText(holder.mItem.getContent());
+        if(holder.mItem.getResponseTo() != null)
+            holder.tvResponses.setText(holder.mItem.getResponseTo().substring(holder.mItem.getResponseTo().length() - 5));
+
+        if(holder.mItem.getPhoto() != null){
+            Glide
+                    .with(ctx)
+                    .load(holder.mItem.getPhoto().getUrl())
+                    .override(150, 150)
+                    .into(holder.ivPict);
+        }else {
+            Glide
+                    .with(ctx)
+                    .load(R.mipmap.ic_no_image)
+                    .override(150, 150)
+                    .into(holder.ivPict);
+        }
+
+
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                if(SharedPreferencesManager.getSomeStringValue(Constants.TOKEN) != null){
+                    Intent i = new Intent(ctx, CreateCommentActivity.class);
+                    i.putExtra("responseId", holder.mItem.getId());
+                    i.putExtra("id", SharedPreferencesManager.getSomeStringValue(Constants.THREAD_ID));
+                    ctx.startActivity(i);
                 }
             }
         });
+    }
+
+    public void setData(Thread thread) {
+        this.mValues = thread.getComments();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -58,20 +94,20 @@ public class MyCommentsRecyclerViewAdapter extends RecyclerView.Adapter<MyCommen
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final ImageView ivPict;
+        public final TextView tvContent;
+        public final TextView tvResponses;
+        public final TextView tvId;
+        public Comment mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            ivPict = view.findViewById(R.id.ivCommentListPict);
+            tvContent = view.findViewById(R.id.tvCommentListContent);
+            tvResponses = view.findViewById(R.id.tvCommentListResponses);
+            tvId = view.findViewById(R.id.tvCommentListId);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }

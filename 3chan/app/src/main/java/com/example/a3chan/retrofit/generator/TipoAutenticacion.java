@@ -1,4 +1,4 @@
-package com.example.not4chanapp.retrofit.generator;
+package com.example.a3chan.retrofit.generator;
 
 public enum TipoAutenticacion {
     SIN_AUTENTICACION, BASIC, JWT
